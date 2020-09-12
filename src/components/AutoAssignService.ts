@@ -17,7 +17,7 @@ class AutoAssignService {
     const summary = crewService.getSummary()
     let diff = 0
     // set initial jobToAssign as rendom value. It may change value later if it will find right pecentage gup
-    let jobToAssign = Job[Object.keys(Job)[Math.floor(Math.random() * Object.keys(Job).length - 1)] as Job] 
+    let jobToAssign = Job[Object.keys(Job)[Math.floor(Math.random() * Object.keys(Job).length - 1)] as Job]
 
     for (let job in jobSplit) {
       const currentPercent = (summary.counts[job as Job] / summary.totalMembers * 100)

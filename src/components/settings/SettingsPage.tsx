@@ -11,7 +11,7 @@ interface InputProps {
 }
 
 interface Validation {
-  isValid: boolean,
+  isValid: boolean
   messages: string[]
 }
 
@@ -46,7 +46,7 @@ function SettingsPage (props: {}) {
     medic: { isValid: true, messages: [] } as Validation,
     engineer: { isValid: true, messages: [] } as Validation,
     pilot: { isValid: true, messages: [] } as Validation,
-    form: { isValid: true, messages: [] } as Validation
+    form: { isValid: true, messages: [] } as Validation,
   })
 
   useEffect(() => {
@@ -62,8 +62,7 @@ function SettingsPage (props: {}) {
   }, [])
 
   function handleSubmit () {
-    validate();
-    
+    validate()
     if (!isFormValid()) {
       return
     }
@@ -74,7 +73,7 @@ function SettingsPage (props: {}) {
     })
   }
 
-  function validateValue (value: string): Validation  {
+  function validateValue (value: string): Validation {
     let isValid = true
     const messages: string[] = []
     const number = Number.parseInt(value)
@@ -91,8 +90,8 @@ function SettingsPage (props: {}) {
     return { isValid, messages }
   }
 
-  function isFormValid(): boolean {
-    return Object.keys(validation).every(key => validation[key as keyof typeof validation].isValid);
+  function isFormValid (): boolean {
+    return Object.keys(validation).every(key => validation[key as keyof typeof validation].isValid)
   }
 
   function validate (): void {
@@ -103,7 +102,7 @@ function SettingsPage (props: {}) {
       validation.form.isValid = false
       validation.form.messages = ['The sum of 3 numbers should be 100%']
     } else {
-      validation.form.isValid = true;
+      validation.form.isValid = true
       validation.form.messages = []
     }
     setValidation({ ...validation })
