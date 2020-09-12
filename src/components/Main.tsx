@@ -4,11 +4,13 @@ import Header from './Header'
 import SettingsPage from './settings/SettingsPage'
 import CrewPage from './crew/CrewPage'
 
+import autoAssignService from './AutoAssignService'
 import crewService from '../emulator/crewService'
 import settingsService from '../emulator/settingsService'
 import operationService from '../emulator/operationService'
 
 function Main (props: {}) {
+  autoAssignService.onMemberAdded()
   return <main>
     <HashRouter>
       <Header />
