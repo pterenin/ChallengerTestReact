@@ -8,10 +8,29 @@ function CrewPage (props: {}) {
 
   useEffect(
     () => {
-      crewService.getCrew().then(crew => setCrew(crew))
+      const unsub = crewService.onMemberUpdated(
+        newMember => {
+          // remove new item if it's already exists
+          const _crew = crew.filter(member => newMember.id !== member.id)
+          setSortAndSetCrew([..._crew, newMember])
+        }
+      )
+      return unsub
+    }
+  )
+
+  useEffect(
+    () => {
+      crewService.getCrew().then(crew => setSortAndSetCrew(crew))
     },
     []
   )
+
+  function setSortAndSetCrew (newCrew: Crew) {
+    // sort newCrew by last name and set the state
+    const sortedCrew = newCrew.sort((a, b) => a.lastName.localeCompare(b.lastName))
+    setCrew(sortedCrew)
+  }
 
   return <div className='tableContainer'>
     <CrewTable crew={crew} />
