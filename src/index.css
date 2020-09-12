@@ -74,6 +74,7 @@ button {
   border: 0;
   margin: 8px;
   min-width: 128px;
+  cursor: pointer;
 }
 
 button.disabled {
