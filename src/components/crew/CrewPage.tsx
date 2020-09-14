@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Crew } from '../../emulator/types'
+import { Crew, Member } from '../../emulator/types'
 import crewService from '../../emulator/crewService'
 import CrewTable from './CrewTable'
 
@@ -11,8 +11,8 @@ function CrewPage (props: {}) {
       const unsub = crewService.onMemberUpdated(
         newMember => {
           // remove new item if it's already exists
-          const _crew = crew.filter(member => newMember.id !== member.id)
-          setSortAndSetCrew([..._crew, newMember])
+          const _crew = crew.filter((member: Member) => newMember.id !== member.id)
+          sortAndSetCrew([..._crew, newMember])
         }
       )
       return unsub
@@ -21,12 +21,12 @@ function CrewPage (props: {}) {
 
   useEffect(
     () => {
-      crewService.getCrew().then(crew => setSortAndSetCrew(crew))
+      crewService.getCrew().then(crew => sortAndSetCrew(crew))
     },
     []
   )
 
-  function setSortAndSetCrew (newCrew: Crew) {
+  function sortAndSetCrew (newCrew: Crew) {
     // sort newCrew by last name and set the state
     const sortedCrew = newCrew.sort((a, b) => a.lastName.localeCompare(b.lastName))
     setCrew(sortedCrew)
